@@ -19,14 +19,12 @@ class ScanController(
         return amassScanProcessingService.process(domain)
     }
 
+    /**
+     * This API is used for refreshing the scan state on the UI page.
+     */
     @GetMapping("/domain/{domain}/version/{version}")
     fun getScanByDomainAndVersion(@PathVariable domain: String, @PathVariable version: Int): AmassScan {
         return amassScanPersistenceService.findByDomainAndVersion(domain, version)
-    }
-
-    @GetMapping("/health")
-    fun health(): String {
-        return "up1"
     }
 
     @GetMapping
