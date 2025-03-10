@@ -1,4 +1,4 @@
-# Project Name
+# Amass Scan
 
 ## Overview
 This project consists of a frontend (React/Node.js), a backend (Spring Boot), and a PostgreSQL database, all containerized using Docker. The application is orchestrated using Docker Compose to simplify deployment and management.
