@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: Amass
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/test_db}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:root}
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  liquibase:
+    change-log: classpath:/db/changelog/app-changelog.xml
+    enabled: true
+
+async:
+  maxPoolSize: 10
+  corePoolSize: 5
+
+scan:
+  # Timeout for Amass scan job in minutes.
+  # This value defines the maximum duration for an Amass scan to run.
+  # For example, a scan for a domain like google.com could take several hours.
+  # The default value is set to 5 minutes, but it is configurable through the 'AMASS_SCAN_TIMEOUT' environment variable.
+  timeout-minutes: ${AMASS_SCAN_TIMEOUT:5}
+  scheduler:
+    # The fixed rate in milliseconds for the scheduler to run the retry job.
+    # This property determines how often the retry job runs. It is set to run once per hour by default (3600000 ms).
+    # The job is responsible for reprocessing Amass scan records that are still in progress or have failed.
+    # This value can be configured through the 'SCAN_REPROCESS_SCHEDULE' environment variable.
+    fixed-rate-ms: ${SCAN_REPROCESS_SCHEDULE:3600000}
+    # Duration (in hours) that determines when Amass scan records are considered eligible for reprocessing.
+    # This value is used to select records from the database that were persisted more than 'reprocess-duration-hours' ago.
+    # For example, if a scan has been in progress for more than 1 hour, it will be selected for reprocessing.
+    # This value should always be larger than 'timeout-minutes' to avoid reprocessing scans that haven't completed yet.
+    # The default value is set to 1 hour but can be configured through the 'AMASS_REPROCESS_DURATION' environment variable.
+    reprocess-duration-hours: ${AMASS_REPROCESS_DURATION:1}

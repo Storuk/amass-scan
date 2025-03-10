@@ -1,0 +1,41 @@
+version: '3.7'
+
+services:
+  # PostgreSQL Database Service
+  postgres:
+    image: postgres:13
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: amass_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # Backend Application Service
+  be_app:
+    build: ./amass-be-app/.
+    container_name: be-app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/amass_db
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: password
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+
+  # FE Application Service
+  fe_app:
+    build: ./amass-fe-app/.
+    container_name: fe-app
+    depends_on:
+      - be_app
+    ports:
+      - "5173:80"
+
+# Volumes to persist PostgreSQL data
+volumes:
+  postgres_data:

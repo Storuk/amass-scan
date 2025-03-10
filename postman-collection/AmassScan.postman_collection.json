@@ -1,0 +1,78 @@
+{
+	"info": {
+		"_postman_id": "3dea6f23-9df6-40d7-84a1-b548cebe2125",
+		"name": "AmassScan",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25120930",
+		"_collection_link": "https://lively-station-621778.postman.co/workspace/Team-Workspace~e13392d7-38b0-4a37-86f7-01a98d65fc8d/collection/25120930-3dea6f23-9df6-40d7-84a1-b548cebe2125?action=share&source=collection_link&creator=25120930"
+	},
+	"item": [
+		{
+			"name": "GetScanHistory",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{server.url}}/api/v1/scans",
+					"host": [
+						"{{server.url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"scans"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "InitiateScan",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{server.url}}/api/v1/scans?domain=google.com",
+					"host": [
+						"{{server.url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"scans"
+					],
+					"query": [
+						{
+							"key": "domain",
+							"value": "google.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetScanByDomainAndVersion",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{server.url}}/api/v1/scans/domain/google.com/version/1",
+					"host": [
+						"{{server.url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"scans",
+						"domain",
+						"google.com",
+						"version",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

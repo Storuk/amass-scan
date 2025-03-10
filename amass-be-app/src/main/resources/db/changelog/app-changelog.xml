@@ -1,0 +1,13 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <include file="db/changelog/scripts/create_amass_scan_table.sql"/>
+    <include file="db/changelog/scripts/create_amass_scan_subdomains_table.sql"/>
+    <include file="db/changelog/scripts/create_amass_scan_ip_addresses_table.sql"/>
+    <include file="db/changelog/scripts/create_amass_scan_email_servers_table.sql"/>
+    <include file="db/changelog/scripts/create_amass_scan_dns_servers_table.sql"/>
+    <include file="db/changelog/scripts/create_schedlock.sql"/>
+
+</databaseChangeLog>
